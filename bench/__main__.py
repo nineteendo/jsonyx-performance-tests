@@ -12,10 +12,10 @@ from sys import maxsize
 from timeit import Timer
 from typing import TYPE_CHECKING, Any
 
-import jsonc  # type: ignore
+import jsonyx
 from tabulate import tabulate  # type: ignore
 
-import jsonyx
+import jsonc  # type: ignore
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -99,7 +99,7 @@ def _run_benchmark(
             except TypeError:
                 times[lib] = inf
 
-        unit: float = min(times.values())
+        unit: float = times["json"]
         row: list[Any] = [case]
         for time in times.values():
             normalized_time = time / unit
