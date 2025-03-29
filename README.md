@@ -1,23 +1,23 @@
 # Benchmark
 
-| encode                                      | json | jsonc | unit (μs) |
-|:--------------------------------------------|-----:|------:|----------:|
-| List of 65,536 booleans                     | 1.00 |  0.93 |   1568.74 |
-| List of 16,384 ASCII strings                | 1.00 |  1.12 |   2830.72 |
-| List of 4,096 floats                        | 1.00 |  1.00 |   2996.67 |
-| List of 4,096 dicts with 1 int              | 1.00 |  1.05 |   1369.86 |
-| Medium complex object                       | 1.00 |  0.99 |    140.46 |
-| List of 4,096 strings                       | 1.00 |  0.93 |   5979.93 |
-| Complex object                              | 1.00 |  0.98 |   1590.89 |
-| Dict with 256 lists of 256 dicts with 1 int | 1.00 |  1.05 |  22387.50 |
+| encode                                      |  json | jsonc | jsonyx | reference time |
+|:--------------------------------------------|------:|------:|-------:|---------------:|
+| List of 256 booleans                        | 1.05x | 1.00x |  0.97x |        6.69 μs |
+| List of 256 ASCII strings                   | 0.81x | 1.00x |  0.96x |       47.44 μs |
+| List of 256 dicts with 1 int                | 0.94x | 1.00x |  1.11x |       82.78 μs |
+| Medium complex object                       | 0.95x | 1.00x |  1.09x |      118.56 μs |
+| List of 256 floats                          | 1.02x | 1.00x |  1.02x |      157.28 μs |
+| List of 256 strings                         | 1.44x | 1.00x |  1.11x |      295.94 μs |
+| Complex object                              | 1.04x | 1.00x |  1.06x |     1514.53 μs |
+| Dict with 256 lists of 256 dicts with 1 int | 0.95x | 1.00x |  1.13x |    22693.31 μs |
 
-| decode                                      | json | jsonc | unit (μs) |
-|:--------------------------------------------|-----:|------:|----------:|
-| List of 65,536 booleans                     | 1.00 |  1.30 |   1177.90 |
-| List of 16,384 ASCII strings                | 1.00 |  0.89 |   1679.06 |
-| List of 4,096 floats                        | 1.00 |  1.04 |   1086.71 |
-| List of 4,096 dicts with 1 int              | 1.00 |  1.08 |   1270.86 |
-| Medium complex object                       | 1.00 |  1.13 |    100.01 |
-| List of 4,096 strings                       | 1.00 |  0.60 |   1615.06 |
-| Complex object                              | 1.00 |  0.87 |   1237.70 |
-| Dict with 256 lists of 256 dicts with 1 int | 1.00 |  1.06 |  29709.79 |
+| decode                                      |  json | jsonc | jsonyx | reference time |
+|:--------------------------------------------|------:|------:|-------:|---------------:|
+| List of 256 booleans                        | 0.87x | 1.00x |  1.34x |        6.77 μs |
+| List of 256 ASCII strings                   | 0.78x | 1.00x |  1.42x |       28.49 μs |
+| List of 256 dicts with 1 int                | 0.94x | 1.00x |  1.30x |       76.36 μs |
+| List of 256 floats                          | 0.97x | 1.00x |  1.07x |       76.51 μs |
+| List of 256 strings                         | 0.91x | 1.00x |  1.56x |       84.64 μs |
+| Medium complex object                       | 0.92x | 1.00x |  1.44x |      102.71 μs |
+| Complex object                              | 1.06x | 1.00x |  1.06x |     1163.69 μs |
+| Dict with 256 lists of 256 dicts with 1 int | 0.98x | 1.00x |  1.13x |    37174.33 μs |
