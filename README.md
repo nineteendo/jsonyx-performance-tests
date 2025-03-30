@@ -1,4 +1,4 @@
-# Benchmark
+# Benchmark (Mar 29, 2025)
 
 | encode                                      |  json | jsonc | jsonyx | reference time |
 |:--------------------------------------------|------:|------:|-------:|---------------:|
