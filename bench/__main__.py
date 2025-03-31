@@ -74,7 +74,7 @@ _ENCODE_CASES: dict[str, Any] = {
 }
 _ENCODE_FUNCS: dict[str, Callable[[Any], Any]] = {
     "json": json.JSONEncoder().encode,
-    "jsonc": jsonc.JSONEncoder().encode,
+    "json (setuptools)": jsonc.JSONEncoder().encode,
     "jsonyx": jsonyx.Encoder(ensure_ascii=True).dumps,
 }
 _DECODE_CASES: dict[str, Any] = {
@@ -82,7 +82,7 @@ _DECODE_CASES: dict[str, Any] = {
 }
 _DECODE_FUNCS: dict[str, _Func] = {
     "json": json.JSONDecoder().decode,
-    "jsonc": jsonc.JSONDecoder().decode,
+    "json (setuptools)": jsonc.JSONDecoder().decode,
     "jsonyx": jsonyx.Decoder(cache_keys=True).loads,
 }
 
