@@ -83,7 +83,7 @@ _DECODE_CASES: dict[str, Any] = {
 _DECODE_FUNCS: dict[str, _Func] = {
     "json": json.JSONDecoder().decode,
     "jsonc": jsonc.JSONDecoder().decode,
-    "jsonyx": jsonyx.Decoder().loads,
+    "jsonyx": jsonyx.Decoder(cache_keys=True).loads,
 }
 
 
