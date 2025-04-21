@@ -13,6 +13,7 @@ from timeit import Timer
 from typing import TYPE_CHECKING, Any
 
 import jsonyx
+from jsonyx.allow import NAN_AND_INFINITY, NON_STR_KEYS, SURROGATES
 from tabulate import tabulate  # type: ignore[import-untyped]
 
 import jsonc  # type: ignore
@@ -75,7 +76,12 @@ _ENCODE_CASES: dict[str, Any] = {
 _ENCODE_FUNCS: dict[str, Callable[[Any], Any]] = {
     "json": json.JSONEncoder().encode,
     "json (setuptools)": jsonc.JSONEncoder().encode,
-    "jsonyx": jsonyx.Encoder(ensure_ascii=True).dumps,
+    "jsonyx": jsonyx.Encoder(
+        allow=NAN_AND_INFINITY | NON_STR_KEYS | SURROGATES,
+        end="",
+        ensure_ascii=True,
+        skipkeys=True
+    ).dumps,
 }
 _DECODE_CASES: dict[str, Any] = {
     case: jsonyx.dumps(obj) for case, obj in _ENCODE_CASES.items()
@@ -83,7 +89,9 @@ _DECODE_CASES: dict[str, Any] = {
 _DECODE_FUNCS: dict[str, _Func] = {
     "json": json.JSONDecoder().decode,
     "json (setuptools)": jsonc.JSONDecoder().decode,
-    "jsonyx": jsonyx.Decoder(cache_keys=True).loads,
+    "jsonyx": jsonyx.Decoder(
+        allow=NAN_AND_INFINITY | SURROGATES, cache_keys=True
+    ).loads,
 }
 
 
@@ -102,7 +110,7 @@ def _run_benchmark(
             except TypeError:
                 times[lib] = inf
 
-        reference_time: float = times["jsonc"]
+        reference_time: float = times["json (setuptools)"]
         row: list[Any] = [case]
         row.extend(f"{time / reference_time:.02f}x" for time in times.values())
         row.append(f"{1_000_000 * reference_time:.02f} \u03bcs")
