@@ -1,2 +1,2 @@
-jsonyx==2.2.1
+jsonyx @ git+https://github.com/nineteendo/jsonyx@7c31ee44d0ad3113cf3f1c405ee30e9304b263b0
 tabulate==0.9.0
