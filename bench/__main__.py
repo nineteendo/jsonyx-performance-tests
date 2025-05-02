@@ -1,4 +1,5 @@
 """JSON benchmark."""
+# TODO(Nice Zombies): re-run benchmark
 from __future__ import annotations
 
 __all__: list[str] = []
@@ -7,7 +8,7 @@ import json
 from functools import partial
 from math import inf
 from pathlib import Path
-from random import random, seed
+from random import randint, random, seed
 from sys import maxsize
 from timeit import Timer
 from typing import TYPE_CHECKING, Any
@@ -41,11 +42,14 @@ _ENCODE_CASES: dict[str, Any] = {
     "List of 256 ASCII strings": [
         "A pretty long string which is in a list",
     ] * 256,
+    "List of 256 ints": [
+        randint(0, 1_000_000) for _ in range(256)  # noqa: S311
+    ],
     "List of 256 floats": [
         maxsize * random() for _ in range(256)  # noqa: S311
     ],
     "List of 256 dicts with 1 int": [
-        {str(random() * 20): int(random() * 1_000_000)}  # noqa: S311
+        {str(random() * 20): randint(0, 1_000_000)}  # noqa: S311
         for _ in range(256)
     ],
     "Medium complex object": [[_USER, _FRIENDS]] * 6,
@@ -67,7 +71,7 @@ _ENCODE_CASES: dict[str, Any] = {
     "Complex object": jsonyx.read(Path(__file__).parent / "sample.json"),
     "Dict with 256 lists of 256 dicts with 1 int": {
         str(random() * 20): [  # noqa: S311
-            {str(random() * 20): int(random() * 1_000_000)}  # noqa: S311
+            {str(random() * 20): randint(0, 1_000_000)}  # noqa: S311
             for _ in range(256)
         ]
         for _ in range(256)
